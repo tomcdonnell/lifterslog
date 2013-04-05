@@ -1,0 +1,3 @@
+[submodule "lib/tom"]
+	path = lib/tom
+	url = git@github.com:tomcdonnell/lib_tom
