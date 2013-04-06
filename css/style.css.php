@@ -36,7 +36,7 @@ h1
 
 p
 {
-   margin-bottom: 12px;
+   margin-bottom: 10px;
    width: 310px;
 }
 
@@ -99,7 +99,7 @@ td.toggle-learn-more
 input.button
 {
    font-size: 20px;
-   padding: 15px;
+   padding: 18px;
    width: 100%;
 }
 
@@ -107,6 +107,7 @@ input.text-input,
 select
 {
    width: 100%;
+   padding: 1px;
 }
 
 input.submit-input
@@ -118,4 +119,9 @@ input.submit-input
 p.submit
 {
    text-align: center;
+}
+
+label
+{
+   font-size: 16px;
 }

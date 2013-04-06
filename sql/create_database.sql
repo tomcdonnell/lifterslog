@@ -6,17 +6,18 @@ CREATE TABLE exercise
    PRIMARY KEY (id),
    KEY nameShort (nameShort),
    KEY nameLong (nameLong)
-) ENGINE=InnoDB;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 CREATE TABLE user
 (
    id int(10) unsigned NOT NULL AUTO_INCREMENT,
    `create` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
    username varchar(32) NOT NULL,
+   password_md5_hash text NOT NULL,
    emailAddress varchar(64) NOT NULL,
    PRIMARY KEY (id),
-   KEY username (username)
-) ENGINE=InnoDB;
+   UNIQUE KEY username (username)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 CREATE TABLE workout
 (
@@ -30,7 +31,7 @@ CREATE TABLE workout
    PRIMARY KEY (id),
    CONSTRAINT FOREIGN KEY (idExercise) REFERENCES exercise (id),
    CONSTRAINT FOREIGN KEY (idUser) REFERENCES user (id)
-) ENGINE=InnoDB;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 INSERT INTO exercise
 (nameShort, nameLong)
@@ -45,12 +46,12 @@ VALUES
 ('pushup', 'Push Up'),
 ('situp', 'Sit Up');
 
-INSERT INTO user
-(`create`, username, emailAddress)
-VALUES
-('2013-04-05 00:00:00', 'TMac', 'tomcdonnell@gmail.com');
+insert into user
+(`create`, username, emailaddress)
+values
+('2013-04-05 00:00:00', 'tmac', 'tomcdonnell@gmail.com');
 
-INSERT INTO workout
+iNSERT INTO workout
 (`create`, idExercise, idUser, nGramsIncludingBar, nRepititions, notes)
 VALUES
 ('2013-03-31 10:30:00', 1, 1, 20000, 10, ''),
