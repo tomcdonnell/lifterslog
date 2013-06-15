@@ -13,7 +13,7 @@ class HtmlUtil
    /*
     *
     */
-   public static function echoHtmlForHeaderAndReturnIndent()
+   public static function echoHtmlForHeaderAndReturnIndent($pageName)
    {
       echo "<!DOCTYPE html>\n";
       echo "<html>\n";
@@ -21,39 +21,15 @@ class HtmlUtil
       echo "  <meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>\n";
       echo "  <title>Lifter's Log</title>\n";
 
-      UtilsHtml::echoHtmlScriptAndLinkTagsForJsAndCssFiles
-      (
-         array
-         (
-            'css/style.css.php'
-         ),
-         array
-         (
-            // Order important.
-            'lib/tom/js/contrib/jquery/1.7/jquery_minified.js',
-
-            // Order unimportant.
-            'js/LiftersLogHomePage.js'       ,
-            'js/main.js'                     ,
-            'lib/tom/js/utils/utils.js'      ,
-            'lib/tom/js/utils/utilsAjax.js'  ,
-            'lib/tom/js/utils/utilsObject.js',
-            'lib/tom/js/utils/utilsValidator.js'
-         )
-      );
+      self::_echoHtmlScriptAndLinkTagsForJsAndCssFiles($pageName);
 
       echo " </head>\n";
       echo " <body>\n";
-      echo "  <table>\n";
-      echo "   <tbody>\n";
-      echo "    <tr><th colspan='2'><h1>Lifter's Log</h1></th></tr>\n";
-      echo "    <tr>\n";
-      echo "     <th colspan='2'>\n";
-      echo "      <div id='img-wrapper-div'>\n";
-      echo "       <img src='images/the_thinking_lifter_with_dumbell.jpg'/>\n";
-      echo "      </div>\n";
-      echo "     </th>\n";
-      echo "    </tr>\n";
+      echo "  <div id='page-wrapper-div'>\n";
+      echo "   <div id='header-div'>\n";
+      echo "    <h1>Lifter's Log</h1>\n";
+      echo "   </div>\n";
+      echo "   <div id='content-div'>\n";
 
       return '    ';
    }
@@ -63,8 +39,8 @@ class HtmlUtil
     */
    public static function echoHtmlForFooter()
    {
-      echo "   </tbody>\n";
-      echo "  </table>\n";
+      echo "   </div>\n";
+      echo "  </div>\n";
       echo " </body>\n";
       echo "</html>\n";
    }
@@ -108,23 +84,28 @@ class HtmlUtil
    /*
     *
     */
-   public static function echoHtmlForLogLiftsForm($indent)
+   public static function echoHtmlForLogLiftsSection($indent)
    {
       $i = &$indent; // Abbreviation.
 
-      echo "$i<form method='post' action='submit.php'>\n";
-      echo "$i <p>\n";
-      echo "$i  <label for='username-input'>Username:</label><br/>\n";
-      echo "$i  <input type='text' class='text-input' id='username-input' name='username'/>\n";
-      echo "$i </p>\n";
-      echo "$i <p>\n";
-      echo "$i  <label for='password-input'>Password:</label><br/>\n";
-      echo "$i  <input type='password' class='text-input' id='password-input' name='password'/>\n";
-      echo "$i </p>\n";
-      echo "$i <p class='submit'>\n";
-      echo "$i  <input type='submit' class='submit-input' value='Submit' name='log-lifts'/>\n";
-      echo "$i </p>\n";
-      echo "$i</form>\n";
+      echo "$i<p class='tiny-text'>In order to log lifts you must first log in.";
+      echo    " This is to prevent others from modifying your log.</p>\n";
+      echo "$i<p class='tiny-text'>If you do not have a username and password,";
+      echo    " get them first by";
+      echo    " <a id='log-lifts-signing-up-anchor' href=''>signing up</a>.</p>\n";
+      echo "$i<p class='heading-p'>Log In To Log Lifts</p>\n";
+      echo "$i<p>\n";
+      echo "$i <label class='small-text' for='username-input'>Username:</label>\n";
+      echo "$i <input type='text' class='text-input' id='username-input' name='username'/>\n";
+      echo "$i</p>\n";
+      echo "$i<p>\n";
+      echo "$i <label class='small-text' for='password-input'>Password:</label>\n";
+      echo "$i <input type='password' class='text-input' id='password-input' name='password'/>\n";
+      echo "$i</p>\n";
+      echo "$i<p class='submit'>\n";
+      echo "$i <input type='button' id='submit-log-lifts-login' class='submit-input'";
+      echo    " value='Submit'/>\n";
+      echo "$i</p>\n";
    }
 
    /*
@@ -134,7 +115,7 @@ class HtmlUtil
    {
       $i = &$indent; // Abbreviation.
 
-      echo "$i<form method='post' action='submit.php'>\n";
+      echo "$i<form method='post' action='view_log.php'>\n";
       echo "$i <p>\n";
       echo "$i  <label for='username-select'>\n";
       echo "$i   View whose lifting log?<br/>\n";
@@ -148,7 +129,7 @@ class HtmlUtil
       echo     " name='username'/>\n";
       echo "$i </p>\n";
       echo "$i <p class='submit'>\n";
-      echo "$i  <input type='submit' class='submit-input' value='Submit' name='view-log'/>\n";
+      echo "$i  <input type='submit' class='submit-input' value='Submit'/>\n";
       echo "$i </p>\n";
       echo "$i</form>\n";
    }
@@ -160,24 +141,77 @@ class HtmlUtil
    {
       $i = &$indent; // Abbreviation.
 
-      echo "$i<p class='tiny-text'>\n";
+      echo "$i<p class='small-text'>\n";
       echo "$i Lifter's Log is a very simple training log and analysis tool designed for";
       echo   " weightlifters.\n";
       echo "$i</p>\n";
-      echo "$i<p class='tiny-text'>\n";
-      echo "$i It is designed to be used during a workout, since the time each set is logged is\n";
-      echo "$i recorded as the time the set was performed.\n";
+      echo "$i<p class='small-text'>\n";
+      echo "$i It is designed to be used during a workout, either on a phone, tablet, laptop, or";
+      echo   " desktop computer.\n";
       echo "$i</p>\n";
-      echo "$i<p class='tiny-text'>\n";
+      echo "$i<p class='small-text'>\n";
       echo "$i Full logs may be downloaded at any time in CSV format.\n";
       echo "$i</p>\n";
-      echo "$i<p class='tiny-text'>\n";
+      echo "$i<p class='small-text'>\n";
       echo "$i Click the 'View Log' button on the left and choose a public log to see what may\n";
       echo "$i be logged and what charting and analysis options are available.\n";
       echo "$i</p>\n";
-      echo "$i<p class='tiny-text'>\n";
-      echo "$i Site creator: <a action='_blank' href='http://tomcdonnell.net'>Tom McDonnell</a>\n";
-      echo "$i (username TMac).\n";
+      echo "$i<p class='small-text'>\n";
+      echo "$i Site creator: <a href='http://tomcdonnell.net'>Tom McDonnell</a> (username TMac)\n";
       echo "$i</p>\n";
+   }
+
+   // Private functions. ////////////////////////////////////////////////////////////////////////
+
+   /*
+    *
+    */
+   private static function _echoHtmlScriptAndLinkTagsForJsAndCssFiles($pageName)
+   {
+      $cssByPageName = array
+      (
+         'common'   => array('lib/tom/css/general_styles.css', 'css/common.css.php'   ),
+         'home'     => array('css/home.css.php'     ),
+         'logLifts' => array('css/log_lifts.css.php'),
+         'viewLog'  => array('css/view_log.css.php' )
+      );
+
+      $jsByPageName = array
+      (
+         'common' => array
+         (
+            // Order important.
+            'lib/tom/js/contrib/jquery/1.7/jquery_minified.js',
+
+            // Order unimportant.
+            'lib/tom/js/utils/utils.js'      ,
+            'lib/tom/js/utils/utilsAjax.js'  ,
+            'lib/tom/js/utils/utilsObject.js',
+            'lib/tom/js/utils/utilsValidator.js'
+         ),
+         'home' => array
+         (
+            'js/LiftersLogHomePage.js',
+            'js/main.js'
+         ),
+         'logLifts' => array(),
+         'viewLog'  => array()
+      );
+
+      if (!array_key_exists($pageName, $cssByPageName))
+      {
+         throw new Exception("No css files specified for page name '$pageName'.");
+      }
+
+      if (!array_key_exists($pageName, $jsByPageName))
+      {
+         throw new Exception("No js files specified for page name '$pageName'.");
+      }
+
+      UtilsHtml::echoHtmlScriptAndLinkTagsForJsAndCssFiles
+      (
+         array_merge($cssByPageName['common'], $cssByPageName[$pageName]),
+         array_merge($jsByPageName['common'] , $jsByPageName[$pageName] )
+      );
    }
 }

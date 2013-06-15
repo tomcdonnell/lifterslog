@@ -5,38 +5,11 @@
 
 header('Content-type: text/css');
 
-$colors = array
-(
-   'background' => '#99f'
-);
-
-$widths = array
-(
-   'border' => 4
-);
+include dirname(__FILE__) . '/common_css_constants.php';
 ?>
-*
-{
-   border-width: 0;
-   margin: 0;
-   padding: 0;
-}
-
-*.tiny-text
-{
-   font-size: 13px;
-}
-
-h1
-{
-   font-family: serif;
-   font-size: 40px;
-   padding: 20px;
-}
-
 p
 {
-   margin-bottom: 10px;
+   margin-bottom: 11px;
    width: 310px;
 }
 
@@ -45,8 +18,7 @@ p
    height: 375px;
 }
 
-input.highlight,
-table
+input.highlight
 {
    background-color: <?php echo $colors['background']; ?>;
 }
@@ -56,13 +28,13 @@ table
    border-collapse: collapse;
    margin-left: auto;
    margin-right: auto;
+   width: 500px;
 }
 
-table,
 th,
 td
 {
-   border: solid <?php echo $widths['border']; ?>px #000;
+   border: <?php echo $widths['border']; ?>px solid #000;
 }
 
 th,
@@ -75,6 +47,7 @@ td
 th
 {
    width: 150px;
+   height: 34px;
 }
 
 td
@@ -113,7 +86,7 @@ select
 input.submit-input
 {
    width: 150px;
-   height: 30px;
+   height: 32px;
 }
 
 p.submit
@@ -124,4 +97,12 @@ p.submit
 label
 {
    font-size: 16px;
+}
+
+p.heading-p
+{
+   text-align: center;
+   font-family: serif;
+   font-weight: bold;
+   margin-bottom: 0;
 }
