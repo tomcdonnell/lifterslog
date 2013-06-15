@@ -58,7 +58,7 @@ class HtmlUtil
       echo "$i  <span class='tiny-text'>(minimum length two characters)</span>\n";
       echo "$i </label>\n";
       echo "$i <br/>\n";
-      echo "$i <input type='text' class='text-input' id='choose-username-input'/>";
+      echo "$i <input type='text' class='text-input' id='choose-username-input'/>\n";
       echo "$i</p>\n";
       echo "$i<p>\n";
       echo "$i <label for='choose-password-input'>\n";
@@ -74,7 +74,7 @@ class HtmlUtil
       echo "$i  <span class='tiny-text'>(to be used only for password reminders)</span>\n";
       echo "$i </label>\n";
       echo "$i <br/>\n";
-      echo "$i <input type='text' class='text-input' id='email-address-input'/>";
+      echo "$i <input type='text' class='text-input' id='email-address-input'/>\n";
       echo "$i</p>\n";
       echo "$i<p class='submit'>\n";
       echo "$i <input type='button' id='submit-sign-up' class='submit-input' value='Submit'/>\n";
@@ -157,7 +157,8 @@ class HtmlUtil
       echo "$i be logged and what charting and analysis options are available.\n";
       echo "$i</p>\n";
       echo "$i<p class='small-text'>\n";
-      echo "$i Site creator: <a href='http://tomcdonnell.net'>Tom McDonnell</a> (username TMac)\n";
+      echo "$i Site creator: ";
+      echo   "<a target='_blank' href='http://tomcdonnell.net'>Tom McDonnell</a> (username TMac)\n";
       echo "$i</p>\n";
    }
 
@@ -184,6 +185,7 @@ class HtmlUtil
             'lib/tom/js/contrib/jquery/1.7/jquery_minified.js',
 
             // Order unimportant.
+            'js/LiftersLogUtils.js'          ,
             'lib/tom/js/utils/utils.js'      ,
             'lib/tom/js/utils/utilsAjax.js'  ,
             'lib/tom/js/utils/utilsObject.js',
@@ -191,11 +193,16 @@ class HtmlUtil
          ),
          'home' => array
          (
-            'js/LiftersLogHomePage.js',
-            'js/main.js'
+            'js/home/LiftersLogHomePage.js',
+            'js/home/main.js'
          ),
-         'logLifts' => array(),
-         'viewLog'  => array()
+         'logLifts' => array
+         (
+            'js/log_lifts/LiftersLogLogLiftsPage.js',
+            'js/log_lifts/main.js'                  ,
+            'lib/tom/js/contrib/utils/DomBuilder.js'
+         ),
+         'viewLog' => array()
       );
 
       if (!array_key_exists($pageName, $cssByPageName))

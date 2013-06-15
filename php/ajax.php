@@ -13,8 +13,10 @@ require_once dirname(__FILE__) . '/utils/ConfigUtil.php';
 
 try
 {
-   UtilsValidator::checkArray($_POST, array('action' => 'string', 'params' => 'array'));
-   extract($_POST);
+   $msg = json_decode(file_get_contents('php://input'), true);
+
+   UtilsValidator::checkArray($msg, array('action' => 'string', 'params' => 'array'));
+   extract($msg);
 
    switch ($action)
    {
@@ -24,6 +26,10 @@ try
 
     case 'loginUser':
       $returnArray = loginUser($pdoEx, $params);
+      break;
+
+    case 'getLogLiftsSelectorOptionsInfo':
+      $returnArray = getLogLiftsSelectorOptionsInfo($pdoEx, $params);
       break;
 
     default:
@@ -190,5 +196,23 @@ function assertCreateUserParamsAreValidAndReturnTrimmedVersions(PdoExtended $pdo
    }
 
    return $params;
+}
+
+/*
+ *
+ */
+function getLogLiftsSelectorOptionsInfo($pdoEx, $params)
+{
+   $exerciseNameById = $pdoEx->selectIndexedColumn
+   (
+      'SELECT id, nameLong
+       FROM exercise
+       ORDER BY nameLong ASC'
+   );
+
+   return array
+   (
+      'exercise' => $exerciseNameById
+   );
 }
 ?>

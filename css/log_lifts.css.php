@@ -81,20 +81,30 @@ table#log-table td
    padding: 0;
 }
 
+table#log-table td input,
 table#log-table td select
 {
    width: 100%;
-   background: #fff;
-   border: 1px solid #ccc;
 }
 
-table#log-table td.done-td,
-table#log-table td.time-td
+table#log-table td select
 {
-   border-color: #ccc;
-   border-left-width: 1px;
-   border-bottom-width: 1px;
+   background: #fff;
+}
+
+table#log-table th
+{
+   border-bottom-color: #ccc;
+   border-left-color: <?php echo $colors['background']; ?>;
+   border-right-color: <?php echo $colors['background']; ?>;
    border-style: solid;
+   border-top-color: <?php echo $colors['background']; ?>;
+   border-width: 1px;
+}
+
+table#log-table td
+{
+   border: 1px solid #ccc;
 }
 
 table#log-table td.time-td

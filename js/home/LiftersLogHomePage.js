@@ -63,16 +63,18 @@ function LiftersLogHomePage()
          $.ajax
          (
             {
-               data:
-               {
-                  action: 'createUser',
-                  params:
+               data: JSON.stringify
+               (
                   {
-                     emailAddress: $('#email-address-input'  ).attr('value'),
-                     password    : $('#choose-password-input').attr('value'),
-                     username    : $('#choose-username-input').attr('value')
+                     action: 'createUser',
+                     params:
+                     {
+                        emailAddress: $('#email-address-input'  ).attr('value'),
+                        password    : $('#choose-password-input').attr('value'),
+                        username    : $('#choose-username-input').attr('value')
+                     }
                   }
-               }
+               )
             }
          );
       }
@@ -97,15 +99,17 @@ function LiftersLogHomePage()
          $.ajax
          (
             {
-               data:
-               {
-                  action: 'loginUser',
-                  params:
+               data: JSON.stringify
+               (
                   {
-                     password: $('#password-input').attr('value'),
-                     username: $('#username-input').attr('value')
+                     action: 'loginUser',
+                     params:
+                     {
+                        password: $('#password-input').attr('value'),
+                        username: $('#username-input').attr('value')
+                     }
                   }
-               }
+               )
             }
          );
       }
@@ -217,17 +221,6 @@ function LiftersLogHomePage()
    /*
     *
     */
-   function _displayAjaxFailureMessage(message, boolRemoveAfterShortDelay)
-   {
-      var f = 'LiftersLogHomePage._displayAjaxFailureMessage()';
-      UTILS.checkArgs(f, arguments, ['string', 'boolean']);
-
-      alert(message);
-   }
-
-   /*
-    *
-    */
    function _setDisabledForAllInputs(bool)
    {
       var f = 'LiftersLogHomePage._setDisabledForAllInputs()';
@@ -260,7 +253,7 @@ function LiftersLogHomePage()
             url     : 'php/ajax.php',
             success : UTILS.ajax.createReceiveAjaxMessageFunction
             (
-               f, _displayAjaxFailureMessage,
+               f, LiftersLogUtils.displayAjaxFailureMessage,
                {
                   createUser: _displayCreateUserSuccessMessage,
                   loginUser : _respondToLoginUserRequestResponse
