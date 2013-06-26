@@ -11,8 +11,9 @@ UtilsError::initErrorAndExceptionHandler('log.txt');
 $i = HtmlUtil::echoHtmlForHeaderAndReturnIndent('home');
 
 echo "$i<div id='img-wrapper-div'>\n";
-echo "$i <img src='images/the_thinking_lifter_with_dumbell.jpg'/>\n";
+//echo "$i <img src='images/the_thinking_lifter_with_dumbell.jpg'/>\n";
 echo "$i</div>\n";
+
 echo "$i<table>\n";
 echo "$i <tbody>\n";
 echo "$i  <tr>\n";

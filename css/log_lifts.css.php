@@ -41,7 +41,6 @@ table#subheading-table-2
    color: #000;
 }
 
-
 table#subheading-table-1 td.align-l {width: 20%;}
 table#subheading-table-1 td.align-c {width: 60%;}
 table#subheading-table-1 td.align-r {width: 20%;}
@@ -50,16 +49,21 @@ table#subheading-table-2 td.align-l {width: 40%;}
 table#subheading-table-2 td.align-c {width: 20%;}
 table#subheading-table-2 td.align-r {width: 40%;}
 
+div#log-table-wrapper
+{
+   background-image: url('http://localhost/tom/websites/lifterslog.com/images/the_thinking_lifter_with_dumbell.jpg');
+   padding-top: 20px;
+   padding-bottom: 20px;
+}
+
 table#log-table
 {
    border-style: solid;
    border-color: #000;
-   border-top-width: 0;
-   border-left-width: 0;
-   border-right-width: 0;
-   border-bottom-width: <?php echo $widths['border']; ?>px;
+   border-width: <?php echo $widths['border']; ?>px;
    border-collapse: collapse;
-   width: 100%;
+   margin-left: auto;
+   margin-right: auto;
 }
 
 table#log-table th
@@ -67,21 +71,32 @@ table#log-table th
    padding: 2px;
 }
 
-table#log-table th.column-1 {width: 42%;}
-table#log-table th.column-2 {width: 20%;}
-table#log-table th.column-3 {width: 14%;}
-table#log-table th.column-4 {width: 10%;}
-table#log-table th.column-5 {width: 14%;}
+table#log-table th.main-heading
+{
+   padding: 2px;
+   background: #000;
+   color: #fff;
+}
+
+table#log-table th.column-heading
+{
+   background: #99f;
+}
 
 table#log-table td
 {
    background: #fff;
    border-width: 0;
    margin: 0;
-   padding: 0;
+   padding-left: 2px;
+   padding-right: 2px;
 }
 
-table#log-table td input,
+table#log-table td input
+{
+   width: 50px;
+}
+
 table#log-table td select
 {
    width: 100%;
@@ -95,10 +110,10 @@ table#log-table td select
 table#log-table th
 {
    border-bottom-color: #ccc;
-   border-left-color: <?php echo $colors['background']; ?>;
-   border-right-color: <?php echo $colors['background']; ?>;
+   border-left-color: <?php echo $colors['background-main-heading']; ?>;
+   border-right-color: <?php echo $colors['background-main-heading']; ?>;
    border-style: solid;
-   border-top-color: <?php echo $colors['background']; ?>;
+   border-top-color: <?php echo $colors['background-main-heading']; ?>;
    border-width: 1px;
 }
 
@@ -114,7 +129,6 @@ table#log-table td.time-td
 
 table#log-table td.add-row-td input
 {
-   width: 100%;
 }
 
 div#notes-div

@@ -6,87 +6,111 @@
 header('Content-type: text/css');
 
 include dirname(__FILE__) . '/common_css_constants.php';
+
+$percentageHeights = array
+(
+   'img-wrapper-div' => 55
+);
+
+$percentageWidths = array
+(
+   'th' => 30
+);
 ?>
 p
 {
-   margin-bottom: 11px;
-   width: 310px;
+   width: 100%;
 }
 
 #img-wrapper-div
 {
-   height: 375px;
+   border-bottom: <?php echo $commonPixelWidths['border']; ?>px solid #000;
+   height: <?php echo $percentageHeights['img-wrapper-div']; ?>%;
+   text-align: center;
+}
+
+#img-wrapper-div img
+{
+   overflow: hidden;
+   width: 100%;
 }
 
 input.highlight
 {
-   background-color: <?php echo $colors['background']; ?>;
+   background-color: <?php echo $commonColors['background-main-heading']; ?>;
 }
 
 table
 {
    border-collapse: collapse;
+   height: <?php echo (100 - $percentageHeights['img-wrapper-div']); ?>%;
    margin-left: auto;
    margin-right: auto;
-   width: 500px;
+   width: 100%;
 }
 
 th,
 td
 {
-   border: <?php echo $widths['border']; ?>px solid #000;
+   border: 0;
+   border-bottom: <?php echo $commonPixelWidths['border']; ?>px solid #000;
+   height: 25%;
 }
 
-th,
-td
+tr:last-child th,
+tr:last-child td
 {
-   border-left-width: 0;
-   border-right-width: 0;
+   border-bottom: 0;
 }
 
 th
 {
-   width: 150px;
-   height: 34px;
+   width: <?php echo $percentageWidths['th']; ?>%;
+}
+
+td,
+td.expanded
+{
+   width: <?php echo (100 - $percentageWidths['th']); ?>%;
 }
 
 td
 {
+   background-color: <?php echo $commonColors['background-main-heading']; ?>;
+   font-size: 1.5em;
    padding-left: 10px;
 }
 
 td.expanded
 {
-   padding-left: 20px;
-   padding-right: 20px;
 }
 
-td.toggle-sign-up,
-td.toggle-log-lifts,
-td.toggle-view-log,
-td.toggle-learn-more
+td.toggle-learn-more,
+td.toggle-log-lifts ,
+td.toggle-sign-up   ,
+td.toggle-view-log
 {
    display: none;
 }
 
 input.button
 {
-   font-size: 20px;
-   padding: 18px;
+   font-size: 1.6em;
+   height: 100%;
    width: 100%;
 }
 
 input.text-input,
 select
 {
-   width: 100%;
    padding: 1px;
+   width: 90%;
 }
 
 input.submit-input
 {
-   width: 150px;
-   height: 32px;
+   height: 100%;
+   width: 80%;
 }
 
 p.submit
@@ -96,13 +120,13 @@ p.submit
 
 label
 {
-   font-size: 16px;
+   font-size: 1.5em;
 }
 
 p.heading-p
 {
-   text-align: center;
    font-family: serif;
    font-weight: bold;
    margin-bottom: 0;
+   text-align: center;
 }
